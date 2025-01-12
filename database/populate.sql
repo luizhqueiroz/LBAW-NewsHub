@@ -1,0 +1,247 @@
+SET search_path TO lbaw24142;
+
+-----------------------------------------
+-- Populate the database
+-----------------------------------------
+
+INSERT INTO images (image_path) VALUES
+('images/avatar1.jpg'),
+('images/avatar2.jpg'),
+('images/avatar3.jpg'),
+('images/avatar4.jpg'),
+('images/avatar5.jpg'),
+('images/avatar6.jpg');
+
+INSERT INTO tag (name) VALUES
+('Action'),
+('Comedy'),
+('Drama'),
+('Horror'),
+('Thriller'),
+('Sci-Fi'),
+('Romance'),
+('Documentary'),
+('Animation'),
+('Fantasy'),
+('Superhero'),
+('True Crime'),
+('Movies'), 
+('TV Shows');
+
+INSERT INTO users (user_name, email, user_password, reputation, image_id) VALUES -- Password is 123456. Generated using Hash::make('123456')
+('movie_buff91', 'movie_buff91@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 50, 1),
+('tv_series_queen', 'tv_series_queen@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 100, 2),
+('action_fanatic', 'action_fanatic@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 75, 3),
+('horror_lover', 'horror_lover@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 120, 4),
+('comedy_guru', 'comedy_guru@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 40, 5),
+('fantasy_enthusiast', 'fantasy_enthusiast@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 90, 3),
+('film_critic_01', 'film_critic_01@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 80, 1),
+('tvfanatic_89', 'tvfanatic_89@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 60, 2),
+('blockbuster_boy', 'blockbuster_boy@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 100, 3),
+('binge_watcher', 'binge_watcher@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 150, 4),
+('geek_guru', 'geek_guru@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 90, 5),
+('cinema_lover', 'cinema_lover@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 70, 1),
+('series_addict', 'series_addict@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 85, 2),
+('classic_movie_fan', 'classic_movie_fan@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 110, 3),
+('showtime_queen', 'showtime_queen@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 130, 4),
+('movie_enthusiast', 'movie_enthusiast@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 200, 5),
+('film_buff_99', 'film_buff_99@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 55, 1),
+('tv_series_addict', 'tv_series_addict@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 65, 2),
+('popcorn_guy', 'popcorn_guy@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 50, 3),
+('action_movie_fan', 'action_movie_fan@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 120, 4),
+('movie_watcher_77', 'movie_watcher_77@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 75, 5),
+('comedy_freak', 'comedy_freak@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 95, 1),
+('cinemaddict_42', 'cinemaddict_42@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 115, 2),
+('series_buff', 'series_buff@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 80, 3),
+('entertainment_lover', 'entertainment_lover@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 105, 4),
+('tv_show_addict', 'tv_show_addict@example.com', '$2y$10$7W1/udKoJ77y9pDGLwGg4uzhnJiUvA2zpHSJrCbUysqaNyvUW76Fe', 140, 5);
+
+INSERT INTO administrator (adm_name, email, adm_password, image_id) VALUES -- Password is adm123. Generated using Hash::make('adm123')
+('João', 'joão@example.com', '$2y$10$wkkqWV78/ews2L7nXOK/hexC9GSH.ESNePxWFaXeowkjrh4lZwaYm', 1),
+('Carlos', 'carlos@example.com', '$2y$10$wkkqWV78/ews2L7nXOK/hexC9GSH.ESNePxWFaXeowkjrh4lZwaYm', 2),
+('Pedro', 'pedro@example.com', '$2y$10$wkkqWV78/ews2L7nXOK/hexC9GSH.ESNePxWFaXeowkjrh4lZwaYm', 3),
+('Manuel', 'manuel@example.com', '$2y$10$wkkqWV78/ews2L7nXOK/hexC9GSH.ESNePxWFaXeowkjrh4lZwaYm', 4);
+
+INSERT INTO blocked (user_id, blocked_date, appeal, appeal_description) VALUES
+(3, '2024-01-01 12:00:00', FALSE, NULL),
+(4, '2024-01-02 14:00:00', TRUE, 'I was trying to defend myself from an offensive comment about my family.'),
+(10, '2024-01-03 16:00:00', FALSE, NULL);
+
+INSERT INTO news (content, author_id, image_id) VALUES
+('The latest Spider-Man movie breaks box office records!', 1, 1),
+('Breaking News: The new Game of Thrones prequel is confirmed for 2025!', 2, 2),
+('Top 10 Comedy Movies of 2024 that you must watch!', 3, NULL),
+('How to watch all the Star Wars movies in chronological order', 4, 4),
+('The scariest horror movies on Netflix right now', 5, NULL),
+('New trailer for the upcoming "Dune" movie drops today!', 1, 1),
+('Is "The Witcher" Season 3 the best yet? Here’s everything we know', 2, 2),
+('Marvel announces new "Fantastic Four" casting lineup', 3, 3),
+('The most anticipated movies of 2025', 4, 4),
+('5 hidden gems on Netflix you may have missed in 2024', 5, 5),
+('Avengers: Secret Wars will introduce new multiverse characters', 1, 1),
+('Why “Breaking Bad” still dominates TV conversations', 2, 2),
+('The Oscars 2024: Who will take home Best Picture?', 3, 3),
+('Top 10 best TV shows for binge-watching in 2024', 4, 4),
+('The Best Action Movies to watch on Amazon Prime Video', 5, 5),
+('The future of horror films in 2025: What’s next for the genre?', 1, 1),
+('The rise of superhero TV shows and why we can’t get enough of them', 2, 2),
+('Will “Stranger Things” end with a movie? Latest rumors inside', 3, 3),
+('The most underrated animated films of all time', 4, 4),
+('10 classic horror movies that will keep you awake all night', 5, 5),
+('How the "John Wick" franchise became a global phenomenon', 1, 1),
+('New “Harry Potter” series in the works: What we know so far', 2, 2),
+('Star Wars fandom: How the franchise has evolved over the years', 3, 3),
+('The biggest movie flops of 2024: What went wrong?', 4, 4),
+('2024’s best true crime documentaries to stream', 5, 5),
+('“The Mandalorian” season 4: What fans are hoping to see', 1, 1),
+('Netflix’s new original series “The Night Agent” breaks records', 2, 2),
+('Why the 90s are making a comeback in TV and film', 3, 3),
+('Is it the end of “The Walking Dead” franchise?', 4, 4),
+('Exploring the cultural impact of the “Fast & Furious” saga', 5, 5),
+('Upcoming blockbusters: What to expect from the 2024 summer movie season', 1, 1),
+('The rise of K-Dramas: Why more Americans are watching Korean series', 2, 2),
+('The secret behind the success of "Stranger Things" and its fan base', 3, 3),
+('Everything we know about the new "Blade Runner" movie', 4, 4),
+('The importance of diverse representation in Hollywood movies', 5, 5),
+('TV shows we’re most excited about in 2024', 1, 1),
+('The “James Bond” franchise: What to expect in the next 007 film', 2, 2),
+('Best fantasy series to watch if you loved “Game of Thrones”', 3, 3),
+('The transformation of horror movies: How it’s changing in the 21st century', 4, 4),
+('What makes "Friends" still one of the most popular TV shows', 5, 5);
+
+INSERT INTO comment (content, news_id, author_id, img_id) VALUES
+('I’m so excited for this new Spider-Man movie!', 1, 2, 1),
+('Can’t believe they’re bringing back Game of Thrones, but with a twist!', 2, 3, NULL),
+('Great list! I’ve seen most of them, but some are still on my watchlist.', 3, 4, NULL),
+('Star Wars will always be my favorite, love this list!', 4, 5, 4),
+('I’ll never be able to watch horror movies like I used to after seeing that list!', 5, 1, NULL),
+('I can’t wait for "Dune"! The visuals in the first movie were stunning.', 1, 2, 1),
+('The new trailer for Dune looks even better than the first one. So excited!', 1, 3, 2),
+('The Witcher Season 3 is shaping up to be amazing. Can’t wait to see more of Geralt!', 2, 4, 3),
+('I’m hoping for more character development in Season 3. The first two were amazing!', 2, 5, 4),
+('The Marvel "Fantastic Four" casting news has me excited! I wonder who will be playing Reed Richards.', 3, 1, 5),
+('This new "Fantastic Four" movie is going to be huge. Can’t wait to see who’s in it!', 3, 2, 1),
+('I’m already counting down the days until the Oscars. So much good content this year!', 4, 3, 2),
+('Looking forward to the Oscars, especially to see who wins Best Picture. It’s a tough year!', 4, 4, 3),
+('I love binge-watching TV shows, and 2024 seems to have some great options. Top of the list for me is "The Crown"! ', 5, 5, 4),
+('If you haven’t seen "The Crown," do it! It’s a masterpiece. Binge-worthy for sure.', 5, 1, 5),
+('I’m not sure if I’m ready for the new "Avengers" movie, but I’m curious about the multiverse aspect.', 6, 2, 1),
+('I’ve been hearing so much about the Avengers multiverse story. What do you guys think will happen?', 6, 3, 2),
+('Breaking Bad still has the best writing of any show I’ve seen. One of the greatest TV shows of all time.', 7, 4, 3),
+('Can’t get enough of Breaking Bad! It never gets old no matter how many times I watch it.', 7, 5, 4),
+('I’m so excited for the Oscars, especially for the performances this year. Can’t wait!', 8, 1, 5),
+('I think this year’s Best Picture race is going to be incredible. There’s so much competition!', 8, 2, 1),
+('If you haven’t seen "The Bear" on Hulu, you’re missing out. So good for a binge-watch!', 9, 3, 2),
+('I’ll be watching those hidden gems this weekend. Thanks for the recommendations!', 9, 4, 3),
+('It’s crazy how successful Marvel has been. The new "Secret Wars" will be epic!', 10, 5, 4),
+('I’ve been a Marvel fan forever. "Secret Wars" is the next big thing!', 10, 1, 5),
+('I don’t think anything will ever beat "Stranger Things." I hope they do something amazing for the last season!', 11, 2, 1),
+('I feel like Stranger Things is getting better and better every season. Let’s see if they can top it!', 11, 3, 2),
+('Game of Thrones prequels are going to be a hit! The story is so rich and deep.', 12, 4, 3),
+('Excited for the Game of Thrones prequel! I just hope it lives up to the original.', 12, 5, 4),
+('The top 10 best comedy movies list was spot on! So many good recommendations.', 13, 1, 5),
+('Love this list! Every movie here is a classic. Comedy never gets old.', 13, 2, 1),
+('Star Wars has always been iconic. I’m curious how they’ll continue the legacy!', 14, 3, 2),
+('Star Wars will forever be my favorite franchise. Hope they do the new movies justice!', 14, 4, 3);
+
+INSERT INTO follow (follower_id, followed_id) VALUES
+(1, 2),
+(2, 1),
+(2, 3),
+(3, 4),
+(4, 5),
+(5, 1),
+(1, 3),
+(2, 4),
+(2, 5),
+(3, 6),
+(5, 6),
+(6, 7),
+(6, 8),
+(8, 9);
+
+INSERT INTO follow_tag (user_id, tag_id) VALUES
+(1, 11), 
+(1, 4),   
+(3, 1),  
+(4, 3),  
+(5, 2),  
+(5, 10),
+(1, 1),  
+(2, 3),
+(3, 2),  
+(4, 4),
+(5, 5),
+(6, 1),
+(7, 6),  
+(8, 7),  
+(9, 2),
+(10, 3);  
+
+INSERT INTO tag_news (news_id, tag_id) VALUES
+(1, 11), 
+(2, 2),
+(2, 1), 
+(3, 2),  
+(4, 5),  
+(1, 13),  
+(2, 14),  
+(4, 13),  
+(5, 4),  
+(6, 13),
+(7, 14),
+(13, 13),
+(14, 14),
+(10, 13);
+
+INSERT INTO favorite (user_id, news_id) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(10, 15),
+(11, 14),
+(12, 13),
+(13, 12),
+(14, 11),
+(15, 10);
+
+INSERT INTO report (report_description, user_id, comment_id, news_id) VALUES
+('Offensive comment about a TV series', 1, NULL, NULL),
+('False information about a movie release', NULL, 1, NULL),
+('Clickbait headline in the news post', NULL, NULL, 3),
+('Inaccurate review of the movie plot', NULL, NULL, 2),
+('Offensive language in the comment section', 3, NULL, NULL),
+('Clickbait title misleading readers', NULL, NULL, 4),
+('Hate speech in a comment about a TV show', NULL, 3, NULL),
+('Fake information about the movie plot', NULL, NULL, 5),
+('Racist comment in the discussion', NULL, 4, NULL),
+('Personal attack in a comment on the news post', NULL, 5, NULL),
+('Promotion of illegal content', 9, NULL, NULL),
+('Spamming irrelevant comments in the section', 10, NULL, NULL),
+('There is a wrong fact used in the news', NULL, NULL, 11);
+
+INSERT INTO likes (sender_id, news_id, comment_id) VALUES
+(1, 1, NULL),
+(2, 2, NULL),
+(3, NULL, 1),
+(4, NULL, 2),
+(5, 5, NULL),
+(10, 10, NULL),
+(1, 6, NULL),  
+(2, 7, NULL),  
+(3, 8, NULL),  
+(4, 9, NULL), 
+(5, 1, NULL),
+(8, NULL, 10),
+(10, NULL, 11), 
+(1, NULL, 12),  
+(2, NULL, 12),  
+(3, NULL, 16);
+
+-----------------------------------------
+-- end
+-----------------------------------------

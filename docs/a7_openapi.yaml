@@ -1,0 +1,666 @@
+openapi: 3.0.0
+
+info:
+ version: '1.0'
+ title: 'NewsHub Web API'
+ description: 'Web Resources Specification (A7) for NewsHub'
+
+servers:
+- url: http://lbaw.fe.up.pt
+  description: Production server
+
+externalDocs:
+  description: Find more info here.
+  url: https://gitlab.up.pt/lbaw/lbaw2425/lbaw24142/-/wikis/eap
+
+tags:
+  - name: 'M01: Authentication'
+  - name: 'M02: Profile Management'
+  - name: 'M03: Content Management'
+  - name: 'M04: Search'
+  - name: 'M05: Administration'
+  - name: 'M06: Favorites, Tags, Follow and Notifications'
+  - name: 'M07: Static Pages'
+
+paths:
+
+  /login:
+    get:
+      operationId: R101
+      summary: 'R101: Login Form'
+      description: 'Provide login form. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+
+      responses:
+        '200':
+          description: 'Ok. Show log-in UI'
+  
+    post:
+      operationId: R102
+      summary: 'R102: Login Action'
+      description: 'Processes the login form submission. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+              required:
+                - email
+                - password
+        
+      responses:
+        '302':
+          description: 'Redirect after processing the login credentials.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful authentication. Redirect to news feed.'
+                  value: '/'
+                302Error:
+                  description: 'Failed authentication. Redirect to login form.'
+                  value: '/login'
+
+
+  /logout:
+    post:
+      operationId: R103
+      summary: 'R103: Logout Action'
+      description: 'Logout the current authenticated user. Access: USR, ADM'
+      tags:
+        - 'M01: Authentication'
+
+      responses:
+        '302':
+          description: 'Redirect after processing logout.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful logout. Redirect to login form.'
+                  value: '/login'
+
+
+  /register:
+    get:
+      operationId: R104
+      summary: 'R104: Register Form'
+      description: 'Provide new user registration form. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+
+      responses:
+        '200':
+          description: 'Ok. Show sign-up UI'
+
+    post:
+      operationId: R105
+      summary: 'R105: Register Action'
+      description: 'Processes the new user registration form submission. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                image:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+
+      responses:
+        '302':
+          description: 'Redirect after processing the new user information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful authentication. Redirect to login form.'
+                  value: '/login'
+                302Failure:
+                  description: 'Failed authentication. Redirect to register form.'
+                  value: '/register'
+
+
+  /users/{id}:
+      get:
+        operationId: R201
+        summary: 'R201: View User Profile'
+        description: 'Show the individual user profile. Access: USR, ADM'
+        tags:
+          - 'M02: Profile Management'
+
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required: true
+        
+        responses:
+          '200':
+            description: 'Ok. Show view profile UI.'
+      
+      put:
+        operationId: R202
+        summary: 'R202: Update User Profile Action'
+        description: 'Processes the user profile edit form submission. Access: OWN, ADM'
+        tags:
+          - 'M02: Profile Management'
+
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required: true
+
+        requestBody:
+          required: true
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  password:
+                    type: string
+                  image:
+                    type: string
+                required:
+                  - name
+                  - email
+                  - password
+                  - image
+
+        responses:
+          '302':
+            description: 'Redirect after processing the user profile information.'
+            headers:
+              Location:
+                schema:
+                  type: string
+                examples:
+                  302Success:
+                    description: 'Successful profile update. Redirect to view profile.'
+                    value: '/users/{id}'
+                  302Failure:
+                    description: 'Failed profile update. Redirect to edit profile.'
+                    value: '/users/{id}/edit'
+    
+
+  /users/{id}/edit:
+      get:
+        operationId: R203
+        summary: 'R203: Edit User Profile Form'
+        description: 'Provide user profile edit form. Access: OWN, ADM'
+        tags:
+          - 'M02: Profile Management'
+
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required: true
+        
+        responses:
+          '200':
+            description: 'Ok. Show edit profile UI.'
+
+
+  /:
+    get:
+      operationId: R301
+      summary: 'R301: View News Feed'
+      description: 'Show the news feed. Access: PUB, USR, ADM'
+      tags:
+        - 'M03: Content Management'
+
+      responses:
+        '200':
+          description: 'Ok. Show news feed UI.'
+
+
+  /news:
+    post:
+      operationId: R302
+      summary: 'R302: Create News Item Action'
+      description: 'Processes the news creation form submission. Access: USR, ADM'
+      tags:
+        - 'M03: Content Management'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                image:
+                  type: string
+              required:
+                - content
+
+      responses:
+        '302':
+          description: 'Redirect after processing the news creation.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful news item creation. Redirect to news feed.'
+                  value: '/'
+                302Failure:
+                  description: 'Failed news item creation. Redirect to news feed.'
+                  value: '/' 
+
+
+  /news/{id}:
+    get:
+      operationId: R303
+      summary: 'R303: View News Item'
+      description: 'Show the individual news item. Access: PUB, USR, ADM'
+      tags:
+        - 'M03: Content Management'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Ok. Show News item UI.'  
+      
+    put:
+      operationId: R304
+      summary: 'R304: Update News Item Action'
+      description: 'Processes the news item edit form submission. Access: OWN, ADM'
+      tags:
+        - 'M03: Content Management'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                image:
+                  type: string
+              required:
+                - content
+                - image
+
+      responses:
+        '302':
+          description: 'Redirect after processing the news item information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful news update. Redirect to view news.'
+                  value: '/news/{id}'
+                302Failure:
+                  description: 'Failed news update. Redirect to edit news.'
+                  value: '/news/{id}/edit'
+    
+    delete:
+      operationId: R305
+      summary: 'R305: Delete News Item Action'
+      description: 'Deletes the news item. Access: OWN, ADM'
+      tags:
+        - 'M03: Content Management'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after processing the news item deletion.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful news item deletion. Redirect to news feed.'
+                  value: '/'
+                302Failure:
+                  description: 'Failed news item deletion. Redirect to view news.'
+                  value: '/news/{id}'
+
+
+  /api/news:
+      get:
+        operationId: R401
+        summary: 'R401: Search News API'
+        description: 'Searches for news and returns the results as JSON. Access: PUB, USR, ADM.'
+
+        tags: 
+          - 'M04: Search'
+
+        parameters:
+          - in: query
+            name: query
+            description: String to use for full-text search
+            schema:
+              type: string
+            required: false
+          - in: query
+            name: tag
+            description: News tag
+            schema:
+              type: string
+            required: false
+        
+        responses:
+          '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      content:
+                        type: string
+                      published_date:
+                        type: string
+                      author_id:
+                        type: string
+                      image_id:
+                        type: string
+                  example:
+                    - id: 1
+                      content: Will “Stranger Things” end with a movie? Latest rumors inside
+                      published_date: 2024-01-02 12:00:00
+                      author_id: 3
+                      image_id: 3
+                    - id: 15
+                      content: The secret behind the success of "Stranger Things" and its fan base
+                      published_date: 2024-01-03 16:00:00
+                      author_id: 3
+                      image_id: 3
+
+
+  /api/comments:
+    get:
+      operationId: R402
+      summary: 'R402: Search Comments API'
+      description: 'Searches for comments and returns the results as JSON. Access: PUB, USR, ADM.'
+
+      tags: 
+        - 'M04: Search'
+      
+      parameters:
+        - in: query
+          name: query
+          description: String to use for full-text search
+          schema:
+            type: string
+          required: false
+
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    content:
+                      type: string
+                    published_date:
+                      type: string
+                    news_id:
+                      type: string
+                    author_id:
+                      type: string
+                    img_id:
+                      type: string
+                example:
+                  - id: 1
+                    content: I don’t think anything will ever beat "Stranger Things." I hope they do something amazing for the last season!
+                    published_date: 2021-06-01
+                    news_id: 11
+                    author_id: 2
+                    img_id: 1
+                  - id: 2
+                    content: I feel like Stranger Things is getting better and better every season. Let’s see if they can top it!
+                    published_date: 2021-06-02
+                    news_id: 11
+                    author_id: 3
+                    img_id: 2
+
+
+  /search/users:
+    get:
+      operationId: R403
+      summary: 'R403: Search Users'
+      description: 'Searches for comments and returns the results as JSON. Access: PUB, USR, ADM.'
+
+      tags: 
+        - 'M04: Search'
+      
+      parameters:
+        - in: query
+          name: query
+          description: String to use for username search
+          schema:
+            type: string
+          required: false
+
+      responses:
+        '200':
+          description: 'Ok. Show search users UI'
+        
+
+  /admin/{id}:
+    get:
+      operationId: R501
+      summary: 'R501: View Adm Profile'
+      description: 'Show the individual adm profile. Access: ADM'
+      tags:
+        - 'M05: Administration'  
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Ok. Show view profile UI.'
+
+    put:
+      operationId: R502
+      summary: 'R502: Update Adm Profile Action'
+      description: 'Processes the adm profile edit form submission. Access: OWN'
+      tags:
+        - 'M05: Administration'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                image:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+                - image
+
+      responses:
+        '302':
+          description: 'Redirect after processing the adm profile information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful profile update. Redirect to view profile.'
+                  value: '/adms/{id}'
+                302Failure:
+                  description: 'Failed profile update. Redirect to edit profile.'
+                  value: '/adms/{id}/edit'
+
+
+  /admin/{id}/edit:
+    get:
+      operationId: R503
+      summary: 'R503: Edit Adm Profile Form'
+      description: 'Provide adm profile edit form. Access: OWN'
+      tags:
+        - 'M05: Administration'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Ok. Show adm edit profile UI.'
+
+
+  admin/users:
+    get:
+      operationId: R504
+      summary: 'R504: View Users Account Administration'
+      description: 'Show the users account list. Access: ADM'
+      tags:
+        - 'M05: Administration'
+
+      responses:
+        '200':
+          description: 'Ok. Show users account administration UI.' 
+
+    post:
+      operationId: R505
+      summary: 'R505: Create User Account Action'
+      description: 'Processes the new user creation form submission. Access: ADM'
+      tags:
+        - 'M05: Administration'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                image:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+
+      responses:
+        '302':
+          description: 'Redirect after processing the new user information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful creation. Redirect to users account administration.'
+                  value: '/adm/users'
+                302Failure:
+                  description: 'Failed creation. Redirect to users creation form.'
+                  value: '/adm/users/create'
