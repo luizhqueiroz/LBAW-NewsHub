@@ -12,6 +12,33 @@ NewsHub brings fans of movies and series together like never before! Designed fo
 
 Built on cutting-edge technology, NewsHub combines PHP and the Laravel Framework for backend development, JavaScript for interactivity, and Bootstrap for responsive design. HTML5, CSS, and FontAwesome ensure a modern, visually appealing layout, while AJAX delivers a smooth browsing experience. Whether you're exploring content or engaging with the community, NewsHub is your go-to platform for entertainment enthusiasts.
 
+## NewsHub Overview
+
+### Home
+
+![home page](docs/images/homepage.png)
+
+### Follows
+
+![follows page](docs/images/follows.png)
+
+### Trending Movies
+
+![trending page](docs/images/trending.png)
+
+### Notifications
+
+![notifications page](docs/images/notifications.png)
+
+### Admin Feature to Manage Users
+
+![admin feature 1](docs/images/adm_manage_users.png)
+
+### Admin Feature to Manage Tags
+
+![admin feature 2](docs/images/adm_manange_tags.png)
+
+
 ## Project Components
 
 * [ER: Requirements Specification](https://github.com/luizhqueiroz/LBAW-NewsHub/wiki/er)
