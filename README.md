@@ -14,18 +14,14 @@ Built on cutting-edge technology, NewsHub combines PHP and the Laravel Framework
 
 ## Project Components
 
-* [ER: Requirements Specification](https://gitlab.up.pt/lbaw/lbaw2425/lbaw24142/-/wikis/er)
-* [EBD: Database Specification](https://gitlab.up.pt/lbaw/lbaw2425/lbaw24142/-/wikis/ebd)
-* [EAP: Architecture Specification and Prototype](https://gitlab.up.pt/lbaw/lbaw2425/lbaw24142/-/wikis/eap)
-* [PA: Product and Presentation](https://gitlab.up.pt/lbaw/lbaw2425/lbaw24142/-/wikis/pa)
-
-## Artefacts Checklist
-
-* The artefacts checklist is available at: https://docs.google.com/spreadsheets/d/1JgVudprWK17ZKGQ7JpshTFc7GBblxAu14jwLKGqLTXI/edit?usp=sharing
+* [ER: Requirements Specification](https://github.com/luizhqueiroz/LBAW-NewsHub/wiki/er)
+* [EBD: Database Specification](https://github.com/luizhqueiroz/LBAW-NewsHub/wiki/ebd)
+* [EAP: Architecture Specification and Prototype](https://github.com/luizhqueiroz/LBAW-NewsHub/wiki/eap)
+* [PA: Product and Presentation](https://github.com/luizhqueiroz/LBAW-NewsHub/wiki/pa)
 
 ## Product
 
-The final version of the source code is now available in the group's Git repository. You can access it [here](https://gitlab.up.pt/lbaw/lbaw2425/lbaw24142).
+The final version of the source code is now available in the group's Git repository. You can access it [here](https://github.com/luizhqueiroz/LBAW-NewsHub).
 
 The Docker image is available at the group's GitLab Container Registry using the production database and can be run with:
 
