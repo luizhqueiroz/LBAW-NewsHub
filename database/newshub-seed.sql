@@ -763,7 +763,8 @@ CREATE TRIGGER check_comment_date
 
 INSERT INTO images (image_path) VALUES
 ('images/avatars/1733267601_avatar1.jpg'),
-('images/avatars/1733268690_avatar2.jpg');
+('images/avatars/1733268690_avatar2.jpg'),
+('images/avatars/1734625255_adm-avatar.jpg');
 
 INSERT INTO tag (name) VALUES
 ('Action'),
@@ -811,7 +812,7 @@ INSERT INTO users (user_name, email, user_password, reputation, image_id) VALUES
 
 INSERT INTO administrator (adm_name, email, adm_password, image_id) VALUES -- Password is adm123. Generated using Hash::make('adm123')
 ('João', 'joao@example.com', '$2y$10$wkkqWV78/ews2L7nXOK/hexC9GSH.ESNePxWFaXeowkjrh4lZwaYm', NULL),
-('Carlos', 'carlos@example.com', '$2y$10$wkkqWV78/ews2L7nXOK/hexC9GSH.ESNePxWFaXeowkjrh4lZwaYm', NULL),
+('Carlos', 'carlos@example.com', '$2y$10$wkkqWV78/ews2L7nXOK/hexC9GSH.ESNePxWFaXeowkjrh4lZwaYm', 3),
 ('Pedro', 'pedro@example.com', '$2y$10$wkkqWV78/ews2L7nXOK/hexC9GSH.ESNePxWFaXeowkjrh4lZwaYm', NULL),
 ('Manuel', 'manuel@example.com', '$2y$10$wkkqWV78/ews2L7nXOK/hexC9GSH.ESNePxWFaXeowkjrh4lZwaYm', NULL);
 
